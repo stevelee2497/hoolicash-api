@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="DTOs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HooliCash.IServices\HooliCash.IServices.csproj" />
+    <ProjectReference Include="..\HooliCash.Shared\HooliCash.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

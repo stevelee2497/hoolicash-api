@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HooliCash.IRepositories\HooliCash.IRepositories.csproj" />
+    <ProjectReference Include="..\HooliCash.Shared\HooliCash.Shared.csproj" />
+  </ItemGroup>
+
+</Project>
