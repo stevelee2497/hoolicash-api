@@ -15,6 +15,6 @@ namespace HooliCash.Core.Models
 
         public string AvatarUrl { get; set; }
 
-        public virtual ICollection<Transaction> Transactions { get; set; }
+        public virtual ICollection<Wallet> Wallets { get; set; }
     }
 }

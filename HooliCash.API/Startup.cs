@@ -11,8 +11,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
 
 namespace HooliCash.API
 {
@@ -35,6 +35,7 @@ namespace HooliCash.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HooliCash.API", Version = "v1" });
             });
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddDbContext<HooliCashContext>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IUserService, UserService>();

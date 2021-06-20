@@ -58,7 +58,7 @@ namespace HooliCash.Repositories
         public T Find(Guid id)
         {
             var res = Table.Find(id);
-            return res?.IsActive == true ? res : throw new DataNotFoundException($"Cound not find record {typeof(T).Name} id {id}");
+            return res?.IsActive == true ? res : throw new HooliCashException($"Cound not find record {typeof(T).Name} id {id}");
         }
 
         public T First()

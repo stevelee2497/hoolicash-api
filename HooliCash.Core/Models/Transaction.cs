@@ -12,8 +12,6 @@ namespace HooliCash.Core.Models
 
         public TransactionType TransactionType { get; set; }
 
-        public virtual User Owner { get; set; }
-
         public virtual Wallet Wallet { get; set; }
 
         public virtual Category Category { get; set; }

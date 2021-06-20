@@ -31,7 +31,7 @@ namespace HooliCash.Services
                 throw new HooliCashException(Error.EmailNotExist);
             }
 
-            var passwordHash = _passwordHelper.HashPassword(user.Email, user.UpdatedOn);
+            var passwordHash = _passwordHelper.HashPassword(loginUserDto.Password, user.UpdatedOn);
             if (passwordHash != user.PasswordHash)
             {
                 throw new HooliCashException(Error.WrongPassword);
@@ -55,7 +55,7 @@ namespace HooliCash.Services
                 DisplayName = registerUserDto.Email,
                 Email = registerUserDto.Email,
                 PasswordLastUpdatedTime = DateTimeOffset.Now,
-                PasswordHash = _passwordHelper.HashPassword(registerUserDto.Email, DateTimeOffset.Now)
+                PasswordHash = _passwordHelper.HashPassword(registerUserDto.Password, DateTimeOffset.Now)
             };
             _userRepository.Add(user);
             _unitOfWork.Complete();
@@ -64,6 +64,14 @@ namespace HooliCash.Services
             {
                 AccessToken = _tokenHelper.GenerateEncodedToken(user)
             };
+        }
+
+        public void SeedDataUsers()
+        {
+            if (!_userRepository.Any())
+            {
+                Register(new RegisterUserDto { Email = "admin", Password = "admin" });
+            }
         }
     }
 }

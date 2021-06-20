@@ -12,18 +12,6 @@ namespace HooliCash.API.Filters
             HttpStatusCode statusCode;
             switch (context.Exception)
             {
-                case BadRequestException _:
-                    statusCode = HttpStatusCode.BadRequest;
-                    break;
-
-                case DataNotFoundException _:
-                    statusCode = HttpStatusCode.NotFound;
-                    break;
-
-                case InternalServerErrorException _:
-                    statusCode = HttpStatusCode.InternalServerError;
-                    break;
-
                 case HooliCashException _:
                     statusCode = HttpStatusCode.BadRequest;
                     break;

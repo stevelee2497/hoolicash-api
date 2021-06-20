@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\HooliCash.IHelpers\HooliCash.IHelpers.csproj" />
     <ProjectReference Include="..\HooliCash.IRepositories\HooliCash.IRepositories.csproj" />
     <ProjectReference Include="..\HooliCash.IServices\HooliCash.IServices.csproj" />
