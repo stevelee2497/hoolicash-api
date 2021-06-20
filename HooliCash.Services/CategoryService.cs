@@ -15,11 +15,13 @@ namespace HooliCash.Services
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRepository<Category> _categoryRepository;
+        private readonly IRepository<Transaction> _transactionRepository;
 
         public CategoryService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _categoryRepository = unitOfWork.Repository<Category>();
+            _transactionRepository = unitOfWork.Repository<Transaction>();
             _mapper = mapper;
         }
 
@@ -61,6 +63,8 @@ namespace HooliCash.Services
         {
             var model = _categoryRepository.Find(id);
             _categoryRepository.Remove(model);
+            var transactions = _transactionRepository.Where(x => x.Category.Id == id);
+            _transactionRepository.RemoveRange(transactions);
             _unitOfWork.Complete();
             return true;
         }

@@ -58,6 +58,7 @@ namespace HooliCash.Services
             model.Amount = dto.Amount;
             model.TransactionType = Enum.Parse<TransactionType>(dto.TransactionType);
             _transactionRepository.Update(model);
+            _unitOfWork.Complete();
             return _mapper.Map<TransactionDto>(model);
         }
 
