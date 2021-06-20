@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HooliCash.DTOs\HooliCash.DTOs.csproj" />
+    <ProjectReference Include="..\HooliCash.Core\HooliCash.Core.csproj" />
   </ItemGroup>
 
 </Project>

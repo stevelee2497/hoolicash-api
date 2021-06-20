@@ -13,10 +13,6 @@ namespace HooliCash.Core.DbContexts
         public DbSet<Category> Categories { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
 
-        public HooliCashContext(DbContextOptions<HooliCashContext> options) : base(options)
-        {
-        }
-
         public HooliCashContext(IConfiguration configuration)
         {
             Configuration = configuration;

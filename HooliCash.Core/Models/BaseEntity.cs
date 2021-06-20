@@ -4,7 +4,7 @@ namespace HooliCash.Core.Models
 {
     public class BaseEntity
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; private set; }
 
         public DateTimeOffset CreatedOn { get; set; }
 
@@ -13,6 +13,8 @@ namespace HooliCash.Core.Models
         public DateTimeOffset UpdatedOn { get; set; }
 
         public string UpdatedBy { get; set; }
+
+        public bool IsActive { get; set; }
 
         protected BaseEntity()
         {

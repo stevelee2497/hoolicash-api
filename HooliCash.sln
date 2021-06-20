@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HooliCash.API", "HooliCash.API\HooliCash.API.csproj", "{F253A705-CBB7-4291-88DD-D13651492480}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HooliCash.API", "HooliCash.API\HooliCash.API.csproj", "{F253A705-CBB7-4291-88DD-D13651492480}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - API", "1 - API", "{D1E36174-5E13-4E1D-9E99-6AFE85E0F585}"
 EndProject
@@ -13,17 +13,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Repositories", "3 - Rep
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - EntityFrameworkCore", "4 - EntityFrameworkCore", "{D809F3CF-6D69-445A-BD29-12576D350283}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HooliCash.IServices", "HooliCash.IServices\HooliCash.IServices.csproj", "{B7D9B44A-9B05-4C8E-9D28-A0B29DAD7D86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HooliCash.IServices", "HooliCash.IServices\HooliCash.IServices.csproj", "{B7D9B44A-9B05-4C8E-9D28-A0B29DAD7D86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HooliCash.Services", "HooliCash.Services\HooliCash.Services.csproj", "{B4911D4D-E0F4-4BF2-B0C0-EA8336E5D910}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HooliCash.Services", "HooliCash.Services\HooliCash.Services.csproj", "{B4911D4D-E0F4-4BF2-B0C0-EA8336E5D910}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HooliCash.IRepositories", "HooliCash.IRepositories\HooliCash.IRepositories.csproj", "{18B583DD-7E0C-43B1-9CE4-68463ADDE85A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HooliCash.IRepositories", "HooliCash.IRepositories\HooliCash.IRepositories.csproj", "{18B583DD-7E0C-43B1-9CE4-68463ADDE85A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HooliCash.Repositories", "HooliCash.Repositories\HooliCash.Repositories.csproj", "{581C8736-A5A8-4E2B-B460-BC9B953859FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HooliCash.Repositories", "HooliCash.Repositories\HooliCash.Repositories.csproj", "{581C8736-A5A8-4E2B-B460-BC9B953859FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HooliCash.Core", "HooliCash.Core\HooliCash.Core.csproj", "{4C267AF1-0F0E-45C7-AF90-4582DF69B73D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HooliCash.Core", "HooliCash.Core\HooliCash.Core.csproj", "{4C267AF1-0F0E-45C7-AF90-4582DF69B73D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HooliCash.Shared", "HooliCash.Shared\HooliCash.Shared.csproj", "{DF166777-B45A-4673-B24C-4B616D0D6B84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HooliCash.Shared", "HooliCash.Shared\HooliCash.Shared.csproj", "{DF166777-B45A-4673-B24C-4B616D0D6B84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HooliCash.DTOs", "HooliCash.DTOs\HooliCash.DTOs.csproj", "{C1B4F27B-C76D-4D50-9F0B-4A5CF32F50F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HooliCash.Helpers", "HooliCash.Helpers\HooliCash.Helpers.csproj", "{F4B4999A-0141-4BD2-83C0-95D882509924}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HooliCash.IHelpers", "HooliCash.IHelpers\HooliCash.IHelpers.csproj", "{35DE5838-141E-4D01-B2F5-D5CD031DE089}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +65,18 @@ Global
 		{DF166777-B45A-4673-B24C-4B616D0D6B84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF166777-B45A-4673-B24C-4B616D0D6B84}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF166777-B45A-4673-B24C-4B616D0D6B84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1B4F27B-C76D-4D50-9F0B-4A5CF32F50F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1B4F27B-C76D-4D50-9F0B-4A5CF32F50F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1B4F27B-C76D-4D50-9F0B-4A5CF32F50F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1B4F27B-C76D-4D50-9F0B-4A5CF32F50F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4B4999A-0141-4BD2-83C0-95D882509924}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4B4999A-0141-4BD2-83C0-95D882509924}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4B4999A-0141-4BD2-83C0-95D882509924}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4B4999A-0141-4BD2-83C0-95D882509924}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35DE5838-141E-4D01-B2F5-D5CD031DE089}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35DE5838-141E-4D01-B2F5-D5CD031DE089}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35DE5838-141E-4D01-B2F5-D5CD031DE089}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35DE5838-141E-4D01-B2F5-D5CD031DE089}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,6 +89,9 @@ Global
 		{581C8736-A5A8-4E2B-B460-BC9B953859FD} = {2193DC7C-AD38-4DA6-8725-2C79C458DA2C}
 		{4C267AF1-0F0E-45C7-AF90-4582DF69B73D} = {D809F3CF-6D69-445A-BD29-12576D350283}
 		{DF166777-B45A-4673-B24C-4B616D0D6B84} = {D809F3CF-6D69-445A-BD29-12576D350283}
+		{C1B4F27B-C76D-4D50-9F0B-4A5CF32F50F5} = {DE052812-68E9-4A2F-9FDB-92A6FCB706D1}
+		{F4B4999A-0141-4BD2-83C0-95D882509924} = {DE052812-68E9-4A2F-9FDB-92A6FCB706D1}
+		{35DE5838-141E-4D01-B2F5-D5CD031DE089} = {DE052812-68E9-4A2F-9FDB-92A6FCB706D1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B4311409-6131-4222-B3B7-D13D603DBDFC}
