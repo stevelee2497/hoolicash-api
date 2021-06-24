@@ -14,12 +14,10 @@ namespace HooliCash.Services
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IRepository<Transaction> _transactionRepository;
 
         public TransactionService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
-            _transactionRepository = unitOfWork.Repository<Transaction>();
             _mapper = mapper;
         }
 
@@ -34,38 +32,38 @@ namespace HooliCash.Services
                 Wallet = new Wallet { Id = createTransactionDto.WalletId },
                 Category = new Category { Id = createTransactionDto.CategoryId },
             };
-            _transactionRepository.Add(model);
+            _unitOfWork.Transactions.Add(model);
             _unitOfWork.Complete();
             return _mapper.Map<TransactionDto>(model);
         }
 
         public IEnumerable<TransactionDto> GetTransactions(Guid userId)
         {
-            return _transactionRepository.All().Select(_mapper.Map<TransactionDto>);
+            return _unitOfWork.Transactions.All().Select(_mapper.Map<TransactionDto>);
         }
 
         public TransactionDto GetTransaction(Guid transactionId)
         {
-            var model = _transactionRepository.Find(transactionId);
+            var model = _unitOfWork.Transactions.Find(transactionId);
             return _mapper.Map<TransactionDto>(model);
         }
 
         public TransactionDto UpdateTransaction(UpdateTransactionDto dto)
         {
-            var model = _transactionRepository.Find(dto.Id);
+            var model = _unitOfWork.Transactions.Find(dto.Id);
             model.Title = dto.Title;
             model.Detail = dto.Detail;
             model.Amount = dto.Amount;
             model.TransactionType = Enum.Parse<TransactionType>(dto.TransactionType);
-            _transactionRepository.Update(model);
+            _unitOfWork.Transactions.Update(model);
             _unitOfWork.Complete();
             return _mapper.Map<TransactionDto>(model);
         }
 
         public bool DeleteTransaction(Guid id)
         {
-            var model = _transactionRepository.Find(id);
-            _transactionRepository.Remove(model);
+            var model = _unitOfWork.Transactions.Find(id);
+            _unitOfWork.Transactions.Remove(model);
             _unitOfWork.Complete();
             return true;
         }

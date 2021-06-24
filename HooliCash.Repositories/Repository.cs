@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 
 namespace HooliCash.Repositories
 {
-    public class Repository<T> : IRepository<T> where T : BaseEntity
+    public abstract class Repository<T> : IRepository<T> where T : BaseEntity
     {
         protected readonly DbContext Context;
         private readonly DbSet<T> Table;
@@ -20,88 +20,88 @@ namespace HooliCash.Repositories
             Table = Context.Set<T>();
         }
 
-        public T Add(T entity)
+        public virtual T Add(T entity)
         {
             return Table.Add(OnCreate(entity)).Entity;
         }
 
-        public IEnumerable<T> AddRange(IEnumerable<T> entities)
+        public virtual IEnumerable<T> AddRange(IEnumerable<T> entities)
         {
             return entities.Select(x => Table.Add(OnCreate(x)).Entity);
         }
 
-        public IEnumerable<T> All()
+        public virtual IEnumerable<T> All()
         {
             return Table.Where(x => x.IsActive).AsEnumerable();
         }
 
-        public bool Any(Expression<Func<T, bool>> predicate)
+        public virtual bool Any(Expression<Func<T, bool>> predicate)
         {
             return Table.Where(x => x.IsActive).Any(predicate);
         }
 
-        public bool Any()
+        public virtual bool Any()
         {
             return Table.Any(x => x.IsActive);
         }
 
-        public int Count(Expression<Func<T, bool>> predicate)
+        public virtual int Count(Expression<Func<T, bool>> predicate)
         {
             return Table.Where(x => x.IsActive).Count(predicate);
         }
 
-        public int Count()
+        public virtual int Count()
         {
             return Table.Count(x => x.IsActive);
         }
 
-        public T Find(Guid id)
+        public virtual T Find(Guid id)
         {
             var res = Table.Find(id);
             return res?.IsActive == true ? res : throw new HooliCashException($"Cound not find record {typeof(T).Name} id {id}");
         }
 
-        public T First()
+        public virtual T First()
         {
             return Table.Where(x => x.IsActive).First();
         }
 
-        public T First(Expression<Func<T, bool>> predicate)
+        public virtual T First(Expression<Func<T, bool>> predicate)
         {
             return Table.Where(x => x.IsActive).First(predicate);
         }
 
-        public T FirstOrDefault()
+        public virtual T FirstOrDefault()
         {
             return Table.Where(x => x.IsActive).FirstOrDefault();
         }
 
-        public T FirstOrDefault(Expression<Func<T, bool>> predicate)
+        public virtual T FirstOrDefault(Expression<Func<T, bool>> predicate)
         {
             return Table.Where(x => x.IsActive).FirstOrDefault(predicate);
         }
 
-        public T Remove(T entity)
+        public virtual T Remove(T entity)
         {
             return Table.Update(OnRemove(entity)).Entity;
         }
 
-        public IEnumerable<T> RemoveRange(IEnumerable<T> entities)
+        public virtual IEnumerable<T> RemoveRange(IEnumerable<T> entities)
         {
             return entities.Select(x => Table.Update(OnRemove(x)).Entity);
         }
 
-        public T Update(T entity)
+        public virtual T Update(T entity)
         {
             return Table.Update(OnUpdate(entity)).Entity;
         }
 
-        public IEnumerable<T> UpdateRange(IEnumerable<T> entities)
+        public virtual IEnumerable<T> UpdateRange(IEnumerable<T> entities)
         {
             return entities.Select(x => Table.Update(OnUpdate(x)).Entity);
         }
 
-        public IEnumerable<T> Where(Expression<Func<T, bool>> predicate)
+        public virtual IEnumerable<T> Where(Expression<Func<T, bool>> predicate)
         {
             return Table.Where(x => x.IsActive).Where(predicate);
         }

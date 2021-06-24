@@ -1,33 +1,30 @@
 ﻿using HooliCash.Core.DbContexts;
-using HooliCash.Core.Models;
 using HooliCash.IRepositories;
 using System;
-using System.Collections.Generic;
 
 namespace HooliCash.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
         private readonly HooliCashContext Context;
-        private readonly Dictionary<Type, object> Repositories;
         private bool _disposed;
+        private IUserRepository _users;
+        private IWalletRepository _wallets;
+        private ICategoryRepository _categories;
+        private ITransactionRepository _transactions;
 
         public UnitOfWork(HooliCashContext context)
         {
             Context = context;
-            Repositories = new Dictionary<Type, object>();
         }
 
-        public IRepository<T> Repository<T>() where T : BaseEntity
-        {
-            var type = typeof(T);
-            if (!Repositories.ContainsKey(type))
-            {
-                Repositories[type] = new Repository<T>(Context);
-            }
+        public IUserRepository Users => _users ?? (_users = new UserRepository(Context));
 
-            return (IRepository<T>)Repositories[type];
-        }
+        public IWalletRepository Wallets => _wallets ?? (_wallets = new WalletRepository(Context));
+
+        public ICategoryRepository Categories => _categories ?? (_categories = new CategoryRepository(Context));
+
+        public ITransactionRepository Transactions => _transactions ?? (_transactions = new TransactionRepository(Context));
 
         public int Complete()
         {
@@ -47,11 +44,6 @@ namespace HooliCash.Repositories
             {
                 if (disposing)
                 {
-                    if (Repositories != null)
-                    {
-                        Repositories.Clear();
-                    }
-
                     Context.Dispose();
                 }
             }

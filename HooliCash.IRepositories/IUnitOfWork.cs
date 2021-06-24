@@ -5,7 +5,10 @@ namespace HooliCash.IRepositories
 {
     public interface IUnitOfWork : IDisposable
     {
-        IRepository<T> Repository<T>() where T : BaseEntity;
+        IUserRepository Users { get; }
+        IWalletRepository Wallets { get; }
+        ICategoryRepository Categories { get; }
+        ITransactionRepository Transactions { get; }
 
         int Complete();
     }

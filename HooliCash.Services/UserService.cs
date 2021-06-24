@@ -13,19 +13,17 @@ namespace HooliCash.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly ITokenHelper _tokenHelper;
         private readonly IPasswordHelper _passwordHelper;
-        private readonly IRepository<User> _userRepository;
 
         public UserService(IUnitOfWork unitOfWork, ITokenHelper tokenHelper, IPasswordHelper passwordHelper)
         {
             _unitOfWork = unitOfWork;
-            _userRepository = unitOfWork.Repository<User>();
             _tokenHelper = tokenHelper;
             _passwordHelper = passwordHelper;
         }
 
         public LoginResponseDto Login(LoginUserDto loginUserDto)
         {
-            var user = _userRepository.FirstOrDefault(x => x.Email.ToUpper() == loginUserDto.Email.ToUpper());
+            var user = _unitOfWork.Users.FirstOrDefault(x => x.Email.ToUpper() == loginUserDto.Email.ToUpper());
             if (user == null)
             {
                 throw new HooliCashException(Error.EmailNotExist);
@@ -45,7 +43,7 @@ namespace HooliCash.Services
 
         public LoginResponseDto Register(RegisterUserDto registerUserDto)
         {
-            if (_userRepository.Any(x => x.Email.ToUpper() == registerUserDto.Email.ToUpper()))
+            if (_unitOfWork.Users.Any(x => x.Email.ToUpper() == registerUserDto.Email.ToUpper()))
             {
                 throw new HooliCashException(Error.EmailExist);
             }
@@ -57,7 +55,7 @@ namespace HooliCash.Services
                 PasswordLastUpdatedTime = DateTimeOffset.Now,
                 PasswordHash = _passwordHelper.HashPassword(registerUserDto.Password, DateTimeOffset.Now)
             };
-            _userRepository.Add(user);
+            _unitOfWork.Users.Add(user);
             _unitOfWork.Complete();
 
             return new LoginResponseDto
@@ -68,7 +66,7 @@ namespace HooliCash.Services
 
         public void SeedDataUsers()
         {
-            if (!_userRepository.Any())
+            if (!_unitOfWork.Users.Any())
             {
                 Register(new RegisterUserDto { Email = "admin", Password = "admin" });
             }

@@ -14,14 +14,10 @@ namespace HooliCash.Services
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IRepository<Category> _categoryRepository;
-        private readonly IRepository<Transaction> _transactionRepository;
 
         public CategoryService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
-            _categoryRepository = unitOfWork.Repository<Category>();
-            _transactionRepository = unitOfWork.Repository<Transaction>();
             _mapper = mapper;
         }
 
@@ -33,45 +29,45 @@ namespace HooliCash.Services
                 IconUrl = createCategoryDto.IconUrl,
                 TransactionType = Enum.Parse<TransactionType>(createCategoryDto.TransactionType),
             };
-            _categoryRepository.Add(model);
+            _unitOfWork.Categories.Add(model);
             _unitOfWork.Complete();
             return _mapper.Map<CategoryDto>(model);
         }
 
         public IEnumerable<CategoryDto> GetCategories()
         {
-            return _categoryRepository.All().Select(_mapper.Map<CategoryDto>);
+            return _unitOfWork.Categories.All().Select(_mapper.Map<CategoryDto>);
         }
 
         public CategoryDto GetCategory(Guid categoryId)
         {
-            var model = _categoryRepository.Find(categoryId);
+            var model = _unitOfWork.Categories.Find(categoryId);
             return _mapper.Map<CategoryDto>(model);
         }
 
         public CategoryDto UpdateCategory(UpdateCategoryDto dto)
         {
-            var model = _categoryRepository.Find(dto.Id);
+            var model = _unitOfWork.Categories.Find(dto.Id);
             model.Name = dto.Name;
             model.IconUrl = dto.IconUrl;
             model.TransactionType = Enum.Parse<TransactionType>(dto.TransactionType);
-            _categoryRepository.Update(model);
+            _unitOfWork.Categories.Update(model);
             return _mapper.Map<CategoryDto>(model);
         }
 
         public bool DeleteCategory(Guid id)
         {
-            var model = _categoryRepository.Find(id);
-            _categoryRepository.Remove(model);
-            var transactions = _transactionRepository.Where(x => x.Category.Id == id);
-            _transactionRepository.RemoveRange(transactions);
+            var model = _unitOfWork.Categories.Find(id);
+            _unitOfWork.Categories.Remove(model);
+            var transactions = _unitOfWork.Transactions.Where(x => x.Category.Id == id);
+            _unitOfWork.Transactions.RemoveRange(transactions);
             _unitOfWork.Complete();
             return true;
         }
 
         public void SeedDataCategories()
         {
-            _categoryRepository.AddRange(new [] 
+            _unitOfWork.Categories.AddRange(new [] 
             {
                 new Category { Name = "Food", TransactionType = TransactionType.Expense },
                 new Category { Name = "Cafe", TransactionType = TransactionType.Expense },

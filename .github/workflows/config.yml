@@ -1,0 +1,48 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.x
+
+      - name: Install dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: |
+          cd HooliCash.API
+          dotnet build -c Release -o bin/build
+
+      - name: Copy build files to server
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          strip_components: 5
+          source: "/home/runner/work/hoolicash-api/hoolicash-api/HooliCash.API/bin/build/"
+          target: "morethan/hoolicash-api/build"
+
+      - name: Restart server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+            cd morethan
+            docker-compose rm --stop hoolicash-api
+            docker-compose up --detach --build hoolicash-api
