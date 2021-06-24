@@ -8,7 +8,8 @@ namespace HooliCash.API.Mappings
     {
         public MappingProfile()
         {
-            CreateMap<Category, CategoryDto>();
+            CreateMap<Category, CategoryDto>()
+                .ForMember(destination => destination.Transactions, map => map.MapFrom(source => source.Transactions.Count));
         }
     }
 }

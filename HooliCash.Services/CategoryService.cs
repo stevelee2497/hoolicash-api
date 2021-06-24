@@ -64,16 +64,5 @@ namespace HooliCash.Services
             _unitOfWork.Complete();
             return true;
         }
-
-        public void SeedDataCategories()
-        {
-            _unitOfWork.Categories.AddRange(new [] 
-            {
-                new Category { Name = "Food", TransactionType = TransactionType.Expense },
-                new Category { Name = "Cafe", TransactionType = TransactionType.Expense },
-                new Category { Name = "Salary", TransactionType = TransactionType.Income },
-            });
-            _unitOfWork.Complete();
-        }
     }
 }

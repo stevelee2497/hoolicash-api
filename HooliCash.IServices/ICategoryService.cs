@@ -11,6 +11,5 @@ namespace HooliCash.IServices
         CategoryDto GetCategory(Guid categoryId);
         CategoryDto UpdateCategory(UpdateCategoryDto dto);
         bool DeleteCategory(Guid id);
-        void SeedDataCategories();
     }
 }

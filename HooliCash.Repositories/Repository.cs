@@ -12,7 +12,7 @@ namespace HooliCash.Repositories
     public abstract class Repository<T> : IRepository<T> where T : BaseEntity
     {
         protected readonly DbContext Context;
-        private readonly DbSet<T> Table;
+        protected readonly DbSet<T> Table;
 
         public Repository(DbContext context)
         {
