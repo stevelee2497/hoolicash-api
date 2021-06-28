@@ -68,7 +68,7 @@ namespace HooliCash.Services
         {
             if (!_unitOfWork.Users.Any())
             {
-                Register(new RegisterUserDto { Email = "admin", Password = "admin" });
+                Register(new RegisterUserDto { Email = "admin", Password = "admin@123" });
             }
         }
     }
