@@ -1,24 +1,31 @@
-﻿using HooliCash.Core.Models;
+﻿using AutoMapper;
+using HooliCash.Core.Models;
 using HooliCash.DTOs.User;
 using HooliCash.IHelpers;
 using HooliCash.IRepositories;
 using HooliCash.IServices;
 using HooliCash.Shared;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HooliCash.Services
 {
     public class UserService : IUserService
     {
+        private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ITokenHelper _tokenHelper;
         private readonly IPasswordHelper _passwordHelper;
+        private readonly IUserRepository _userRepository;
 
-        public UserService(IUnitOfWork unitOfWork, ITokenHelper tokenHelper, IPasswordHelper passwordHelper)
+        public UserService(IUnitOfWork unitOfWork, ITokenHelper tokenHelper, IPasswordHelper passwordHelper, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _tokenHelper = tokenHelper;
             _passwordHelper = passwordHelper;
+            _userRepository = unitOfWork.Users;
+            _mapper = mapper;
         }
 
         public LoginResponseDto Login(LoginUserDto loginUserDto)
@@ -62,6 +69,11 @@ namespace HooliCash.Services
             {
                 AccessToken = _tokenHelper.GenerateEncodedToken(user)
             };
+        }
+
+        public IEnumerable<UserDto> GetUsers()
+        {
+            return _userRepository.All().Select(_mapper.Map<UserDto>);
         }
 
         public void SeedDataUsers()
