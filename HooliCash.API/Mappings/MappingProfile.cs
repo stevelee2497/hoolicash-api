@@ -4,6 +4,7 @@ using HooliCash.DTOs.Category;
 using HooliCash.DTOs.Transaction;
 using HooliCash.DTOs.User;
 using HooliCash.DTOs.Wallet;
+using System.Linq;
 
 namespace HooliCash.API.Mappings
 {
@@ -14,11 +15,14 @@ namespace HooliCash.API.Mappings
             CreateMap<Transaction, TransactionDto>();
 
             CreateMap<Category, CategoryDto>()
-                .ForMember(destination => destination.Transactions, map => map.MapFrom(source => source.Transactions.Count));
+                .ForMember(destination => destination.TransactionCount, map => map.MapFrom(source => source.Transactions.Count));
 
-            CreateMap<Wallet, WalletDto>();
+            CreateMap<Wallet, WalletDto>()
+                .ForMember(destination => destination.TransactionCount, map => map.MapFrom(source => source.Transactions.Count));
 
-            CreateMap<User, UserDto>();
+            CreateMap<User, UserDto>()
+                .ForMember(destination => destination.WalletCount, map => map.MapFrom(source => source.Wallets.Count))
+                .ForMember(destination => destination.TransactionCount, map => map.MapFrom(source => source.Wallets.SelectMany(x => x.Transactions).Count()));
         }
     }
 }

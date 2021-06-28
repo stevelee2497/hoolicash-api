@@ -9,5 +9,7 @@ namespace HooliCash.DTOs.Wallet
         public string Name { get; set; }
 
         public string IconUrl { get; set; }
+
+        public int TransactionCount { get; set; }
     }
 }

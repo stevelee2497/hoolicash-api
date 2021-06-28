@@ -13,5 +13,9 @@ namespace HooliCash.DTOs.User
         public DateTimeOffset PasswordLastUpdatedTime { get; set; }
 
         public string AvatarUrl { get; set; }
+
+        public int TransactionCount { get; set; }
+
+        public int WalletCount { get; set; }
     }
 }

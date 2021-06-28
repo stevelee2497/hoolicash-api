@@ -10,7 +10,7 @@ namespace HooliCash.DTOs.Category
 
         public string TransactionType { get; set; }
 
-        public int Transactions { get; set; }
+        public int TransactionCount { get; set; }
 
         public string IconUrl { get; set; }
 
