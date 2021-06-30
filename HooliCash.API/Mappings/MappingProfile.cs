@@ -12,7 +12,9 @@ namespace HooliCash.API.Mappings
     {
         public MappingProfile()
         {
-            CreateMap<Transaction, TransactionDto>();
+            CreateMap<Transaction, TransactionDto>()
+                .ForMember(destination => destination.Wallet, map => map.MapFrom(source => source.Wallet))
+                .ForMember(destination => destination.Category, map => map.MapFrom(source => source.Category));
 
             CreateMap<Category, CategoryDto>()
                 .ForMember(destination => destination.TransactionCount, map => map.MapFrom(source => source.Transactions.Count));

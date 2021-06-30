@@ -26,7 +26,7 @@ namespace HooliCash.Services
             {
                 Name = createWalletDto.Name,
                 IconUrl = createWalletDto.IconUrl,
-                User = new User { Id = createWalletDto.UserId }
+                UserId = createWalletDto.UserId
             };
             _unitOfWork.Wallets.Add(model);
             _unitOfWork.Complete();

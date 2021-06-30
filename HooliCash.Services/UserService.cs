@@ -44,6 +44,7 @@ namespace HooliCash.Services
 
             return new LoginResponseDto
             {
+                UserId = user.Id,
                 AccessToken = _tokenHelper.GenerateEncodedToken(user)
             };
         }
@@ -67,6 +68,7 @@ namespace HooliCash.Services
 
             return new LoginResponseDto
             {
+                UserId = user.Id,
                 AccessToken = _tokenHelper.GenerateEncodedToken(user)
             };
         }

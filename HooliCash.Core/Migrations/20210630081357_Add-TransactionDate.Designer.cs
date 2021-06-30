@@ -4,14 +4,16 @@ using HooliCash.Core.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HooliCash.Core.Migrations
 {
     [DbContext(typeof(HooliCashContext))]
-    partial class HooliCashContextModelSnapshot : ModelSnapshot
+    [Migration("20210630081357_Add-TransactionDate")]
+    partial class AddTransactionDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

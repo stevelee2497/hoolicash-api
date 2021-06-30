@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace HooliCash.Core.Models
 {
@@ -7,6 +8,8 @@ namespace HooliCash.Core.Models
         public string Name { get; set; }
 
         public string IconUrl { get; set; }
+
+        public Guid UserId { get; set; }
 
         public virtual ICollection<Transaction> Transactions { get; set; }
 

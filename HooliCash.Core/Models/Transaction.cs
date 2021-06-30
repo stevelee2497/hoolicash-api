@@ -1,4 +1,5 @@
 ﻿using HooliCash.Shared;
+using System;
 
 namespace HooliCash.Core.Models
 {
@@ -11,6 +12,12 @@ namespace HooliCash.Core.Models
         public decimal Amount { get; set; }
 
         public TransactionType TransactionType { get; set; }
+
+        public DateTimeOffset TransactionDate { get; set; }
+
+        public Guid WalletId { get; set; }
+
+        public Guid CategoryId { get; set; }
 
         public virtual Wallet Wallet { get; set; }
 

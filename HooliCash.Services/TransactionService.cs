@@ -29,8 +29,9 @@ namespace HooliCash.Services
                 Detail = createTransactionDto.Detail,
                 Amount = createTransactionDto.Amount,
                 TransactionType = Enum.Parse<TransactionType>(createTransactionDto.TransactionType),
-                Wallet = new Wallet { Id = createTransactionDto.WalletId },
-                Category = new Category { Id = createTransactionDto.CategoryId },
+                WalletId = createTransactionDto.WalletId,
+                CategoryId = createTransactionDto.CategoryId,
+                TransactionDate = createTransactionDto.TransactionDate
             };
             _unitOfWork.Transactions.Add(model);
             _unitOfWork.Complete();

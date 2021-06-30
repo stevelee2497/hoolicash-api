@@ -4,14 +4,16 @@ using HooliCash.Core.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HooliCash.Core.Migrations
 {
     [DbContext(typeof(HooliCashContext))]
-    partial class HooliCashContextModelSnapshot : ModelSnapshot
+    [Migration("20210630080516_Add-Reference")]
+    partial class AddReference
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,9 +82,6 @@ namespace HooliCash.Core.Migrations
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTimeOffset>("TransactionDate")
-                        .HasColumnType("datetimeoffset");
 
                     b.Property<int>("TransactionType")
                         .HasColumnType("int");

@@ -12,6 +12,8 @@ namespace HooliCash.DTOs.Transaction
 
         public string TransactionType { get; set; }
 
+        public DateTimeOffset TransactionDate { get; set; }
+
         public Guid WalletId { get; set; }
 
         public Guid CategoryId { get; set; }
