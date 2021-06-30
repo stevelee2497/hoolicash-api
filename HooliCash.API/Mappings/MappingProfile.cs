@@ -14,6 +14,7 @@ namespace HooliCash.API.Mappings
         {
             CreateMap<Transaction, TransactionDto>()
                 .ForMember(destination => destination.Wallet, map => map.MapFrom(source => source.Wallet))
+                .ForMember(destination => destination.TransactionDate, map => map.MapFrom(source => source.TransactionDate.ToString("yyyy-MM-dd")))
                 .ForMember(destination => destination.Category, map => map.MapFrom(source => source.Category));
 
             CreateMap<Category, CategoryDto>()
