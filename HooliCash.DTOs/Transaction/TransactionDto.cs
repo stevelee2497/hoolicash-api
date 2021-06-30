@@ -16,6 +16,8 @@ namespace HooliCash.DTOs.Transaction
 
         public string TransactionType { get; set; }
 
+        public DateTimeOffset TransactionDate { get; set; }
+
         public virtual WalletDto Wallet { get; set; }
 
         public virtual CategoryDto Category { get; set; }
