@@ -35,7 +35,14 @@ namespace HooliCash.Services
 
         public IEnumerable<WalletDto> GetWallets(Guid userId)
         {
-            return _unitOfWork.Wallets.All().Select(_mapper.Map<WalletDto>);
+            var wallets = _unitOfWork.Wallets.All().Select(_mapper.Map<WalletDto>);
+            var total = new WalletDto
+            {
+                Balance = wallets.Sum(x => x.Balance),
+                TransactionCount = wallets.Sum(x => x.TransactionCount),
+                Name = "Total"
+            };
+            return Enumerable.Empty<WalletDto>().Append(total).Concat(wallets);
         }
 
         public WalletDto GetWallet(Guid walletId)

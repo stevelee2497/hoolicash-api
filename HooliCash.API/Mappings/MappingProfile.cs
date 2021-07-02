@@ -21,7 +21,8 @@ namespace HooliCash.API.Mappings
                 .ForMember(destination => destination.TransactionCount, map => map.MapFrom(source => source.Transactions.Count));
 
             CreateMap<Wallet, WalletDto>()
-                .ForMember(destination => destination.TransactionCount, map => map.MapFrom(source => source.Transactions.Count));
+                .ForMember(destination => destination.TransactionCount, map => map.MapFrom(source => source.Transactions.Count))
+                .ForMember(destination => destination.Balance, map => map.MapFrom(source => source.Transactions.Sum(x => x.Amount)));
 
             CreateMap<User, UserDto>()
                 .ForMember(destination => destination.WalletCount, map => map.MapFrom(source => source.Wallets.Count))

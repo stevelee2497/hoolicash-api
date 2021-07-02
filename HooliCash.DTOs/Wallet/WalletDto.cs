@@ -11,5 +11,7 @@ namespace HooliCash.DTOs.Wallet
         public string IconUrl { get; set; }
 
         public int TransactionCount { get; set; }
+
+        public decimal Balance { get; set; }
     }
 }

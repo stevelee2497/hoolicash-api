@@ -1,6 +1,7 @@
 ﻿using HooliCash.DTOs.Transaction;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace HooliCash.IServices
 {
@@ -11,5 +12,6 @@ namespace HooliCash.IServices
         TransactionDto GetTransaction(Guid transactionId);
         TransactionDto UpdateTransaction(UpdateTransactionDto updateTransactionDto);
         bool DeleteTransaction(Guid transactionId);
+        IEnumerable<TransactionDto> ImportTransactions(StreamReader stream, Guid userId);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using HooliCash.Core.Models;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
 
 namespace HooliCash.IRepositories
@@ -9,7 +10,7 @@ namespace HooliCash.IRepositories
         IWalletRepository Wallets { get; }
         ICategoryRepository Categories { get; }
         ITransactionRepository Transactions { get; }
-
+        IDbContextTransaction BeginTransaction();
         int Complete();
     }
 }

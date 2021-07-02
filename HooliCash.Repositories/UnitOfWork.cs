@@ -1,5 +1,6 @@
 ﻿using HooliCash.Core.DbContexts;
 using HooliCash.IRepositories;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
 
 namespace HooliCash.Repositories
@@ -16,6 +17,7 @@ namespace HooliCash.Repositories
         public UnitOfWork(HooliCashContext context)
         {
             Context = context;
+
         }
 
         public IUserRepository Users => _users ?? (_users = new UserRepository(Context));
@@ -25,6 +27,11 @@ namespace HooliCash.Repositories
         public ICategoryRepository Categories => _categories ?? (_categories = new CategoryRepository(Context));
 
         public ITransactionRepository Transactions => _transactions ?? (_transactions = new TransactionRepository(Context));
+
+        public IDbContextTransaction BeginTransaction()
+        {
+            return Context.Database.BeginTransaction();
+        }
 
         public int Complete()
         {

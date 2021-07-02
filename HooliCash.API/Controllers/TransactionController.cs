@@ -6,8 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace HooliCash.API.Controllers
 {
@@ -67,5 +66,21 @@ namespace HooliCash.API.Controllers
             var response = _transactionService.DeleteTransaction(id);
             return Ok(response);
         }
+
+        [HttpPost("import")]
+        [Authorize]
+        [ProducesResponseType(typeof(IEnumerable<TransactionDto>), StatusCodes.Status200OK)]
+        public ActionResult ImportTransactions([FromForm] UploadFile dto)
+        {
+            using var reader = new StreamReader(dto.File.OpenReadStream());
+            var userId = User.GetUserId();
+            var response = _transactionService.ImportTransactions(reader, userId);
+            return Ok(response);
+        }
+    }
+
+    public class UploadFile
+    {
+        public IFormFile File { get; set; }
     }
 }
