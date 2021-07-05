@@ -33,10 +33,9 @@ namespace HooliCash.API.Controllers
         [HttpGet]
         [Authorize]
         [ProducesResponseType(typeof(IEnumerable<TransactionDto>), StatusCodes.Status200OK)]
-        public ActionResult GetTransactions()
+        public ActionResult GetTransactions([FromQuery] TransactionQuery transactionQuery)
         {
-            var userId = User.GetUserId();
-            var response = _transactionService.GetTransactions(userId);
+            var response = _transactionService.GetTransactions(transactionQuery);
             return Ok(response);
         }
 

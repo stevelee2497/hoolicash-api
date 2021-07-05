@@ -48,9 +48,30 @@ namespace HooliCash.Services
             return _mapper.Map<TransactionDto>(model);
         }
 
-        public IEnumerable<TransactionDto> GetTransactions(Guid userId)
+        public IEnumerable<TransactionDto> GetTransactions(TransactionQuery transactionQuery)
         {
-            return _transactionRepository.All().Select(_mapper.Map<TransactionDto>);
+            var transactions = _transactionRepository.All();
+            if (transactionQuery.UserId != null)
+            {
+                transactions = transactions.Where(x => x.Wallet.UserId == transactionQuery.UserId);
+            }
+
+            if (transactionQuery.WalletId != null)
+            {
+                transactions = transactions.Where(x => x.WalletId == transactionQuery.WalletId);
+            }
+
+            if (transactionQuery.From != null)
+            {
+                transactions = transactions.Where(x => x.TransactionDate >= transactionQuery.From);
+            }
+
+            if (transactionQuery.To != null)
+            {
+                transactions = transactions.Where(x => x.TransactionDate <= transactionQuery.To);
+            }
+
+            return transactions.Select(_mapper.Map<TransactionDto>);
         }
 
         public TransactionDto GetTransaction(Guid transactionId)
